@@ -6,8 +6,7 @@
 def move_crates(move_count, from_stack, to_stack):
     # this function moves crates between stacks
     for x in range(0, move_count):
-        item = from_stack.pop()
-        to_stack.append(item)
+        to_stack.append(from_stack.pop())
 
 def main():
     # initialize stacks
@@ -34,12 +33,12 @@ def main():
         # split out each line so we can capture the numbers
         line_array = file_content[i].strip().split(" ")
         move_count = int(line_array[1])
-        move_from = int(line_array[3]) - 1
-        move_to = int(line_array[5]) - 1
+        move_from = int(line_array[3])
+        move_to = int(line_array[5])
 
         # grab the stacks to operate with
-        from_stack = stacks[move_from]
-        to_stack = stacks[move_to]
+        from_stack = stacks[move_from - 1]
+        to_stack = stacks[move_to - 1]
 
         move_crates(move_count, from_stack, to_stack)
 
@@ -47,8 +46,7 @@ def main():
     top_stacks = ""
 
     for stack in stacks:
-        top = stack.pop()
-        top_stacks += top
+        top_stacks += stack.pop()
 
     print("Top crate for stacks 1 through 9: " + top_stacks)
 

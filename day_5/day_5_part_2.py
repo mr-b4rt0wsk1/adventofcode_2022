@@ -56,8 +56,7 @@ def main():
     top_stacks = ""
 
     for stack in stacks:
-        top = stack.pop()
-        top_stacks += top
+        top_stacks += stack.pop()
 
     print("Top crate for stacks 1 through 9: " + top_stacks)
 
