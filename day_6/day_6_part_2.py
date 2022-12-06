@@ -28,6 +28,6 @@ for char in datastream:
     else:
         pass
 
-print("Start-of-packet begins after this amount of characters: " + str(count))
+print("Start-of-message begins after this amount of characters: " + str(count))
 
 # Answer: 2472
