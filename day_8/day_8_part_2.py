@@ -5,45 +5,32 @@
 
 def calc_scenic_score(row, col, grid, grid_t):
     tree_height = grid[row][col]
+    chunks = []
+    scenic_score = 1
 
-    # calc row to left
-    left_chunk = grid[row][:col]
-    left_chunk.reverse()
-    left_blocking_tree = list(filter(lambda a: a >= tree_height, left_chunk))
-    if left_blocking_tree != []:
-        left_score = left_chunk.index(left_blocking_tree[0]) + 1
-    else:
-        left_score = len(left_chunk)
-    
-    # calc row to right
-    right_chunk = grid[row][col+1:]
-    right_blocking_tree = list(filter(lambda b: b >= tree_height, right_chunk))
-    if right_blocking_tree != []:
-        right_score = right_chunk.index(right_blocking_tree[0]) + 1
-    else:
-        right_score = len(right_chunk)
+    # a "chunk" refers to the list of trees from our current position to the outside of the grid in a certain direction (left, right, top, bottom)
 
-    # calc col to top
-    top_chunk = grid_t[col][:row]
-    top_chunk.reverse()
-    top_blocking_tree = list(filter(lambda c: c >= tree_height, top_chunk))
-    if top_blocking_tree != []:
-        top_score = top_chunk.index(top_blocking_tree[0]) + 1
-    else:
-        top_score = len(top_chunk)
-    
-    # calc col to bottom
-    bottom_chunk = grid_t[col][row+1:]
-    bottom_blocking_tree = list(filter(lambda d: d >= tree_height, bottom_chunk))
-    if bottom_blocking_tree != []:
-        bottom_score = bottom_chunk.index(bottom_blocking_tree[0]) + 1
-    else:
-        bottom_score = len(bottom_chunk)
+    # left chunk
+    chunks.append(list(reversed(grid[row][:col])))
+    # right chunk
+    chunks.append(grid[row][col+1:])
+    # top chunk
+    chunks.append(list(reversed(grid_t[col][:row])))
+    # bottom chunk
+    chunks.append(grid_t[col][row+1:])
 
-    return (left_score * right_score * top_score * bottom_score)
+    for chunk in chunks:
+        blocking_tree = list(filter(lambda i: i >= tree_height, chunk))
+        
+        # compute the score for the chunk based on whether this is a blocking tree or not
+        if blocking_tree != []:
+            scenic_score *= chunk.index(blocking_tree[0]) + 1
+        else:
+            scenic_score *= len(chunk)
+
+    return scenic_score
 
 def main():
-
     # initialize the grid
     grid = []
     file = open('input_day_8.txt', 'r')

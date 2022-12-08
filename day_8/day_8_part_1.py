@@ -4,26 +4,23 @@
 # https://adventofcode.com/2022/day/8
 
 def is_visible(row, col, grid, grid_t):
-    tree_height = int(grid[row][col])
+    tree_height = grid[row][col]
 
-    # check if visible in row
-    if int(max(grid[row][:col])) < tree_height or int(max(grid[row][col+1:])) < tree_height:
-        return True
-    # check if visible in column
-    elif int(max(grid_t[col][:row])) < tree_height or int(max(grid_t[col][row+1:])) < tree_height:
+    # checks for a taller tree in each direction (left, right, up, down)
+    if max(grid[row][:col]) < tree_height or max(grid[row][col+1:]) < tree_height or max(grid_t[col][:row]) < tree_height or max(grid_t[col][row+1:]) < tree_height:
         return True
     else:
         return False
 
 def main():
-
     # initialize the grid
     grid = []
     file = open('input_day_8.txt', 'r')
 
     for line in file:
         row = list(line.strip())
-        grid.append(row)
+        row_ints = [eval(x) for x in row]
+        grid.append(row_ints)
 
     file.close()
 
