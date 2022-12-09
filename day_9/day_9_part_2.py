@@ -17,6 +17,7 @@ def move_knot(previous_knot, current_knot):
     x_diff = previous_knot[0] - current_knot[0]
     y_diff = previous_knot[1] - current_knot[1]
 
+    # checks for and computes x coordinate move
     if x_diff > 0:
         current_knot[0] += 1
     elif x_diff < 0:
@@ -24,6 +25,7 @@ def move_knot(previous_knot, current_knot):
     else:
         pass
 
+    # checks for and computes y coordinate move
     if y_diff > 0:
         current_knot[1] += 1
     elif y_diff < 0:
