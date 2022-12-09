@@ -46,7 +46,7 @@ def perform_instruction(instruction, knots, grid):
     for i in range(0, spaces):
         # first move the head
         knots = move_head(knots, direction)
-        # move remaining knots if needed
+        # move remaining knots in the rope if they do not touch
         for j in range(1, len(knots)):
             previous_knot = knots[j-1]
             current_knot = knots[j]
@@ -72,11 +72,12 @@ def main():
     lines = file.readlines()
     file.close()
 
-    # initialize 1000x1000 grid and H & T position somewhere in the middle
+    # initialize 1000x1000 grid and knots position somewhere in the middle
     grid = [["."]*1000 for x in range(1000)]
     grid[500][500] = "#"
     knots = [[500]*2 for y in range(10)]
 
+    # perform the instructions on the grid
     for line in lines:
         instruction = line.strip().split(" ")
         knots, grid = perform_instruction(instruction, knots, grid)

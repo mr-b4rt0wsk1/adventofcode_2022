@@ -17,6 +17,7 @@ def move_tail(H_pos, T_pos):
     x_diff = H_pos[0] - T_pos[0]
     y_diff = H_pos[1] - T_pos[1]
 
+    # checks for and computes x coordinate move
     if x_diff > 0:
         T_pos[0] += 1
     elif x_diff < 0:
@@ -24,6 +25,7 @@ def move_tail(H_pos, T_pos):
     else:
         pass
 
+    # checks for and computes y coordinate move
     if y_diff > 0:
         T_pos[1] += 1
     elif y_diff < 0:
@@ -69,6 +71,7 @@ def main():
     H_pos = [500, 500]
     T_pos = [500, 500]
 
+    # perform the instructions on the grid
     for line in lines:
         instruction = line.strip().split(" ")
         H_pos, T_pos, grid = perform_instruction(instruction, H_pos, T_pos, grid)
