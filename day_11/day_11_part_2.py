@@ -38,17 +38,16 @@ class Monkey:
                 monkeys[self.throw_f].items.append(str(new_worry_level))
         # increment the monkey's inspect count
         self.inspect_count += len(self.items)
-        # empty the monkeys items since they were all thrown
+        # empty the monkey's items since they were all thrown
         self.items = []
         return monkeys
 
 def main():
-    # parse input
+    # parse input into monkey objects
     file = open('input_day_11.txt', 'r')
     lines = file.readlines()
     file.close()
 
-    # initialize monkeys
     monkeys = []
 
     for line in lines:
